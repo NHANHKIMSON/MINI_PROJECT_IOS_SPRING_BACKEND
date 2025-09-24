@@ -39,4 +39,21 @@ public class ProductServiceImplement implements ProductService {
         return productRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Product Not Found"));
     }
+
+    @Override
+    public ProductEntity updateProduct(Integer id, ProductRequest productRequest) {
+        ProductEntity productEntity = getProductById(id);
+        productEntity.setName(productRequest.getName());
+        CategoryEntity category = categoryService.getCategoryById(productRequest.getCategoryId());
+        productEntity.setCategory(category);
+        return productRepository.save(productEntity);
+    }
+
+    @Override
+    public ProductEntity deleteProduct(Integer id) {
+        ProductEntity productEntity = getProductById(id);
+        productRepository.delete(productEntity);
+        return productEntity;
+    }
+
 }

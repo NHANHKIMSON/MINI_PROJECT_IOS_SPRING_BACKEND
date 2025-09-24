@@ -22,8 +22,8 @@ public class CategoryServiceImplement implements CategoryService {
     }
 
     @Override
-    public CategoryEntity getCategoryById(int categoryId) {
-        CategoryEntity category = categoryRepository.findById(categoryId).orElse(null);
+    public CategoryEntity getCategoryById(Integer id) {
+        CategoryEntity category = categoryRepository.findById(id).orElse(null);
         if (category == null) {
             throw new NotFoundException("Category not found");
         }
@@ -42,5 +42,13 @@ public class CategoryServiceImplement implements CategoryService {
         CategoryEntity category = getCategoryById(id);
         category.setName(categoryRequest.getName());
         return categoryRepository.save(category);
+    }
+    @Override
+    public CategoryEntity deleteCategory(Integer id) {
+        CategoryEntity category = getCategoryById(id);
+        if (category != null) {
+            categoryRepository.delete(category);
+        }
+        return category;
     }
 }

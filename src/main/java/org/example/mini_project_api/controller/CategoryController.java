@@ -1,6 +1,7 @@
 package org.example.mini_project_api.controller;
 
 
+import jakarta.validation.Valid;
 import org.example.mini_project_api.Entity.CategoryEntity;
 import org.example.mini_project_api.dto.request.product.CategoryRequest;
 import org.example.mini_project_api.dto.response.ApiResponse;
@@ -33,18 +34,18 @@ public class CategoryController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ApiResponse<CategoryEntity>> getCategoryById(@RequestParam int categoryId) {
+    public ResponseEntity<ApiResponse<CategoryEntity>> getCategoryById(@PathVariable Integer id) {
         ApiResponse<CategoryEntity> categoryEntityApiResponse = ApiResponse.<CategoryEntity>builder()
                 .message("Get category by id has successfully")
                 .status(HttpStatus.OK)
                 .time(LocalDateTime.MAX)
-                .payload(categoryService.getCategoryById(categoryId))
+                .payload(categoryService.getCategoryById(id))
                 .build();
         return ResponseEntity.ok(categoryEntityApiResponse);
     }
 
     @PostMapping
-    public ApiResponse<CategoryEntity> createCategory(@RequestBody CategoryRequest categoryRequest) {
+    public ApiResponse<CategoryEntity> createCategory(@Valid @RequestBody CategoryRequest categoryRequest) {
         ApiResponse<CategoryEntity> categoryEntityApiResponse;
         categoryEntityApiResponse = ApiResponse.<CategoryEntity>builder()
                 .message("Create category has successfully")
@@ -62,6 +63,18 @@ public class CategoryController {
                 .status(HttpStatus.OK)
                 .time(LocalDateTime.now())
                 .payload(categoryService.updateCategory(id, categoryRequest))
+                .build();
+        return categoryEntityApiResponse;
+    }
+
+    @DeleteMapping("/{id}")
+    public ApiResponse<CategoryEntity> deleteCategory(@PathVariable("id") Integer id) {
+        ApiResponse<CategoryEntity> categoryEntityApiResponse;
+        categoryEntityApiResponse = ApiResponse.<CategoryEntity>builder()
+                .message("Delete category has successfully")
+                .status(HttpStatus.OK)
+                .time(LocalDateTime.now())
+                .payload(categoryService.deleteCategory(id))
                 .build();
         return categoryEntityApiResponse;
     }

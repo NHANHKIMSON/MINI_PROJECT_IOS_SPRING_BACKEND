@@ -8,9 +8,11 @@ import java.util.List;
 public interface CategoryService {
     List<CategoryEntity> categoryList();
 
-    CategoryEntity getCategoryById(int categoryId);
+    CategoryEntity getCategoryById(Integer id);
 
     CategoryEntity createCategory(CategoryRequest categoryRequest);
 
     CategoryEntity updateCategory(Integer id, CategoryRequest categoryRequest);
+
+    CategoryEntity deleteCategory(Integer id);
 }

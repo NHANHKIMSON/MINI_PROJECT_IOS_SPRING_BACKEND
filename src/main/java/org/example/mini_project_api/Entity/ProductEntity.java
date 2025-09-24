@@ -12,9 +12,15 @@ public class ProductEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    private Double price;
 
     @ManyToOne()
     @JoinColumn(name = "category_id")
     @JsonManagedReference
     CategoryEntity category;
+
+    @OneToOne()
+    @JoinColumn(name = "detail_id")
+    @JsonManagedReference
+    private ProductDetail productDetail;
 }

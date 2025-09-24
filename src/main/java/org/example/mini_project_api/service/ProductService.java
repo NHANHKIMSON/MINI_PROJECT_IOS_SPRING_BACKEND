@@ -9,4 +9,6 @@ public interface ProductService {
     List<ProductEntity> getAllProducts();
     ProductEntity createProduct(ProductRequest productRequest);
     ProductEntity getProductById(Integer id);
+    ProductEntity updateProduct(Integer id, ProductRequest productRequest);
+    ProductEntity deleteProduct(Integer id);
 }

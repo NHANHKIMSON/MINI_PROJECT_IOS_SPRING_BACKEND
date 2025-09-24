@@ -22,8 +22,8 @@ public class ProductController {
     public ApiResponse<List<ProductEntity>> getAllProducts() {
         ApiResponse<List<ProductEntity>> productResponseEntity;
         productResponseEntity = ApiResponse.<List<ProductEntity>>builder()
-                .message("Create Product Successfully!")
-                .status(HttpStatus.CREATED)
+                .message("Get Products Successfully!")
+                .status(HttpStatus.OK)
                 .payload(productService.getAllProducts())
                 .time(LocalDateTime.now())
                 .build();
@@ -49,6 +49,29 @@ public class ProductController {
                 .message("Get Product Successfully!")
                 .status(HttpStatus.OK)
                 .payload(productService.getProductById(id))
+                .time(LocalDateTime.now())
+                .build();
+        return productResponseEntity;
+    }
+
+    @PutMapping("/{id}")
+    public ApiResponse<ProductEntity> updateProduct(@PathVariable("id") Integer id, @RequestBody ProductRequest productRequest) {
+        ApiResponse<ProductEntity> productResponseEntity;
+        productResponseEntity = ApiResponse.<ProductEntity>builder()
+                .message("Update Product Successfully!")
+                .status(HttpStatus.OK)
+                .payload(productService.updateProduct(id, productRequest))
+                .time(LocalDateTime.now())
+                .build();
+        return productResponseEntity;
+    }
+    @DeleteMapping("/{id}")
+    public ApiResponse<ProductEntity> deleteProduct(@PathVariable("id") Integer id) {
+        ApiResponse<ProductEntity> productResponseEntity;
+        productResponseEntity = ApiResponse.<ProductEntity>builder()
+                .message("Delete Product Successfully!")
+                .status(HttpStatus.OK)
+                .payload(productService.deleteProduct(id))
                 .time(LocalDateTime.now())
                 .build();
         return productResponseEntity;
