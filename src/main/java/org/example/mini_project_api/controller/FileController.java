@@ -1,6 +1,7 @@
 package org.example.mini_project_api.controller;
 
 
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.example.mini_project_api.dto.request.file.FileDto;
 import org.example.mini_project_api.dto.response.ApiResponse;
@@ -22,6 +23,7 @@ import java.io.IOException;
 public class FileController {
     private final FileService fileService;
     @PostMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @Operation(summary = "Upload New Image")
     public ResponseEntity<?> uploadFile(@RequestParam MultipartFile file) throws IOException {
 
         String fileName = fileService.uploadFile(file);
@@ -47,6 +49,7 @@ public class FileController {
     }
 
     @GetMapping("/view/{fileName}")
+    @Operation(summary = "Get Image By Image Name")
     public ResponseEntity<?> viewFileByFileName(@PathVariable String fileName) throws IOException {
 
         Resource resource = fileService.viewFileByFileName(fileName);
@@ -77,6 +80,7 @@ public class FileController {
 
 
     @GetMapping(value = "/download/{fileName}", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+    @Operation(summary = "Download Image by Image Name")
     public ResponseEntity<?> downloadFileByFileName(@PathVariable String fileName) throws IOException {
 
         Resource resource = fileService.downloadFileByFileName(fileName);
