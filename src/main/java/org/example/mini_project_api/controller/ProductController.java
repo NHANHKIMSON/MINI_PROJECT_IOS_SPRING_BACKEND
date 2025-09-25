@@ -2,6 +2,7 @@ package org.example.mini_project_api.controller;
 
 
 import org.example.mini_project_api.Entity.ProductEntity;
+import org.example.mini_project_api.dto.request.product.ProductFavoriteRequest;
 import org.example.mini_project_api.dto.request.product.ProductRequest;
 import org.example.mini_project_api.dto.response.ApiResponse;
 import org.example.mini_project_api.service.ProductService;
@@ -72,6 +73,17 @@ public class ProductController {
                 .message("Delete Product Successfully!")
                 .status(HttpStatus.OK)
                 .payload(productService.deleteProduct(id))
+                .time(LocalDateTime.now())
+                .build();
+        return productResponseEntity;
+    }
+    @PatchMapping("/{id}")
+    public ApiResponse<ProductEntity> updateProductStatus(@PathVariable("id") Integer id, @RequestBody ProductFavoriteRequest productFavoriteRequest) {
+        ApiResponse<ProductEntity> productResponseEntity;
+        productResponseEntity = ApiResponse.<ProductEntity>builder()
+                .message("Update Product Status Successfully!")
+                .status(HttpStatus.OK)
+                .payload(productService.updateProductStatus(id, productFavoriteRequest))
                 .time(LocalDateTime.now())
                 .build();
         return productResponseEntity;

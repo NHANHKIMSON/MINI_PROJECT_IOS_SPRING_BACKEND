@@ -13,6 +13,7 @@ public class ProductEntity {
     private Long id;
     private String name;
     private String image;
+    private Boolean isFavorite = false;
     private Double price;
 
     @ManyToOne()

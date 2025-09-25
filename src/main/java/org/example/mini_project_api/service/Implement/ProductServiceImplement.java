@@ -2,6 +2,7 @@ package org.example.mini_project_api.service.Implement;
 
 import org.example.mini_project_api.Entity.CategoryEntity;
 import org.example.mini_project_api.Entity.ProductEntity;
+import org.example.mini_project_api.dto.request.product.ProductFavoriteRequest;
 import org.example.mini_project_api.dto.request.product.ProductRequest;
 import org.example.mini_project_api.exception.NotFoundException;
 import org.example.mini_project_api.repository.product.ProductRepository;
@@ -29,6 +30,8 @@ public class ProductServiceImplement implements ProductService {
     public ProductEntity createProduct(ProductRequest productRequest) {
         ProductEntity productEntity = new ProductEntity();
         productEntity.setName(productRequest.getName());
+        productEntity.setImage(productRequest.getImage());
+        productEntity.setIsFavorite(productRequest.getIsFavorite());
         CategoryEntity category = categoryService.getCategoryById(productRequest.getCategoryId());
         productEntity.setCategory(category);
         return productRepository.save(productEntity);
@@ -44,6 +47,8 @@ public class ProductServiceImplement implements ProductService {
     public ProductEntity updateProduct(Integer id, ProductRequest productRequest) {
         ProductEntity productEntity = getProductById(id);
         productEntity.setName(productRequest.getName());
+        productEntity.setImage(productRequest.getImage());
+        productEntity.setIsFavorite(productRequest.getIsFavorite());
         CategoryEntity category = categoryService.getCategoryById(productRequest.getCategoryId());
         productEntity.setCategory(category);
         return productRepository.save(productEntity);
@@ -56,4 +61,10 @@ public class ProductServiceImplement implements ProductService {
         return productEntity;
     }
 
+    @Override
+    public ProductEntity updateProductStatus(Integer id, ProductFavoriteRequest productFavoriteRequest) {
+        ProductEntity productEntity = getProductById(id);
+        productEntity.setIsFavorite(productFavoriteRequest.getIsFavorite());
+        return productRepository.save(productEntity);
+    }
 }
