@@ -14,4 +14,6 @@ public interface ProductService {
     ProductEntity deleteProduct(Integer id);
 
     ProductEntity updateProductStatus(Integer id, ProductFavoriteRequest productFavoriteRequest);
+
+    List<ProductEntity> getProductByCategoryId(Long categoryId);
 }

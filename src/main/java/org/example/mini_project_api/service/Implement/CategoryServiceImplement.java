@@ -33,6 +33,7 @@ public class CategoryServiceImplement implements CategoryService {
     @Override
     public CategoryEntity createCategory(CategoryRequest categoryRequest) {
         CategoryEntity categoryEntity = new CategoryEntity();
+        categoryEntity.setIcon(categoryRequest.getIcon());
         categoryEntity.setName(categoryRequest.getName());
         return categoryRepository.save(categoryEntity);
     }
@@ -40,6 +41,7 @@ public class CategoryServiceImplement implements CategoryService {
     @Override
     public CategoryEntity updateCategory(Integer id, CategoryRequest categoryRequest) {
         CategoryEntity category = getCategoryById(id);
+        category.setIcon(categoryRequest.getIcon());
         category.setName(categoryRequest.getName());
         return categoryRepository.save(category);
     }

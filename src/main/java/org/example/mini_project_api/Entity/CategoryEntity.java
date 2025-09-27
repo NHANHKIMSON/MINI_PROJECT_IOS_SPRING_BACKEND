@@ -20,6 +20,7 @@ public class CategoryEntity {
     @Size(min = 3, max = 50)
     @NotEmpty
     private String name;
+    private String icon;
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     @JsonBackReference
     private List<ProductEntity> products;

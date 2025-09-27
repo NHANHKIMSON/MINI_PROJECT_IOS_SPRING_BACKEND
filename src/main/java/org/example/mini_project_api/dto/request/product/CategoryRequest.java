@@ -10,4 +10,5 @@ public class CategoryRequest {
     @NotEmpty
     @Size(min = 3, max = 50)
     private String name;
+    private String icon;
 }

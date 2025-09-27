@@ -78,7 +78,7 @@ public class FileController {
                 .body(resource);
     }
 
-
+    
     @GetMapping(value = "/download/{fileName}", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
     @Operation(summary = "Download Image by Image Name")
     public ResponseEntity<?> downloadFileByFileName(@PathVariable String fileName) throws IOException {

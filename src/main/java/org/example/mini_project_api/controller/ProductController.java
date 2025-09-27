@@ -96,4 +96,15 @@ public class ProductController {
                 .build();
         return productResponseEntity;
     }
+
+    @GetMapping("categoryId/{categoryId}")
+    public ApiResponse<List<ProductEntity>> getProductsByCategoryId(@PathVariable("categoryId") Long categoryId) {
+        ApiResponse<List<ProductEntity>> productResponseEntity;
+        productResponseEntity = ApiResponse.<List<ProductEntity>>builder()
+                .message("Get Products Successfully!")
+                .status(HttpStatus.OK)
+                .payload(productService.getProductByCategoryId(categoryId))
+                .build();
+        return productResponseEntity;
+    }
 }
