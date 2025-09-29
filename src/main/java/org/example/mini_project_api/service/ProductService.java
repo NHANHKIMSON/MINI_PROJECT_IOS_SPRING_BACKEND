@@ -16,4 +16,6 @@ public interface ProductService {
     ProductEntity updateProductStatus(Integer id, ProductFavoriteRequest productFavoriteRequest);
 
     List<ProductEntity> getProductByCategoryId(Long categoryId);
+
+    List<ProductEntity> getSaveProduct();
 }

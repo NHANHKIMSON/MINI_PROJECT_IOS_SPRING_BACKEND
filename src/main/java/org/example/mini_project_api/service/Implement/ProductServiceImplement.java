@@ -72,9 +72,14 @@ public class ProductServiceImplement implements ProductService {
     public List<ProductEntity> getProductByCategoryId(Long categoryId) {
         System.out.println(categoryId);
         List<ProductEntity> productEntities = productRepository.getAllProductByCategory_Id(categoryId);
-        if (productEntities.size() == 0) {
+        if (productEntities.isEmpty()) {
             throw new NotFoundException("Product Not Found");
         }
         return productEntities;
+    }
+
+    @Override
+    public List<ProductEntity> getSaveProduct() {
+        return productRepository.getAllFavoriteProducts();
     }
 }

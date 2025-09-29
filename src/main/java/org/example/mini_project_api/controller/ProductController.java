@@ -97,13 +97,25 @@ public class ProductController {
         return productResponseEntity;
     }
 
-    @GetMapping("categoryId/{categoryId}")
+    @GetMapping("/{categoryId}")
     public ApiResponse<List<ProductEntity>> getProductsByCategoryId(@PathVariable("categoryId") Long categoryId) {
         ApiResponse<List<ProductEntity>> productResponseEntity;
         productResponseEntity = ApiResponse.<List<ProductEntity>>builder()
                 .message("Get Products Successfully!")
                 .status(HttpStatus.OK)
                 .payload(productService.getProductByCategoryId(categoryId))
+                .build();
+        return productResponseEntity;
+    }
+
+    @GetMapping("isFavorite")
+    public ApiResponse<List<ProductEntity>> getSaveProducts() {
+        ApiResponse<List<ProductEntity>> productResponseEntity;
+        productResponseEntity = ApiResponse.<List<ProductEntity>>builder()
+                .message("Get Products Successfully!")
+                .status(HttpStatus.OK)
+                .payload(productService.getSaveProduct())
+                .time(LocalDateTime.now())
                 .build();
         return productResponseEntity;
     }
