@@ -13,4 +13,12 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Integer>
     ProductEntity findByCategory_Id(Long categoryId);
 
     List<ProductEntity> getAllProductByCategory_Id(Long categoryId);
+
+    @Query("SELECT p FROM ProductEntity p WHERE p.isFavorite = true")
+    List<ProductEntity> getAllFavoriteProducts();
+
+    List<ProductEntity> getTopByPrice(Double price);
+
+    @Query("SELECT p FROM ProductEntity p WHERE p.name LIKE %?1%")
+    List<ProductEntity> findByTitleContainingIgnoreCase(String title);
 }

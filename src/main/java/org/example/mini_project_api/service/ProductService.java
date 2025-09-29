@@ -16,4 +16,10 @@ public interface ProductService {
     ProductEntity updateProductStatus(Integer id, ProductFavoriteRequest productFavoriteRequest);
 
     List<ProductEntity> getProductByCategoryId(Long categoryId);
+
+    List<ProductEntity> getSaveProduct();
+
+    List<ProductEntity> getTopProducts(Double max);
+
+    List<ProductEntity> searchProductByTitle(String title);
 }

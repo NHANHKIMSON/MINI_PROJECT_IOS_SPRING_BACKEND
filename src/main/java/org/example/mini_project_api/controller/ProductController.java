@@ -97,7 +97,7 @@ public class ProductController {
         return productResponseEntity;
     }
 
-    @GetMapping("categoryId/{categoryId}")
+    @GetMapping("category/{categoryId}")
     public ApiResponse<List<ProductEntity>> getProductsByCategoryId(@PathVariable("categoryId") Long categoryId) {
         ApiResponse<List<ProductEntity>> productResponseEntity;
         productResponseEntity = ApiResponse.<List<ProductEntity>>builder()
@@ -106,5 +106,42 @@ public class ProductController {
                 .payload(productService.getProductByCategoryId(categoryId))
                 .build();
         return productResponseEntity;
+    }
+
+    @GetMapping("isFavorite")
+    @Operation(summary = "Get All Product Favorite")
+    public ApiResponse<List<ProductEntity>> getSaveProducts() {
+        ApiResponse<List<ProductEntity>> productResponseEntity;
+        productResponseEntity = ApiResponse.<List<ProductEntity>>builder()
+                .message("Get Products Successfully!")
+                .status(HttpStatus.OK)
+                .payload(productService.getSaveProduct())
+                .time(LocalDateTime.now())
+                .build();
+        return productResponseEntity;
+    }
+
+    @GetMapping("top/{max}")
+    public ApiResponse<List<ProductEntity>> getTopProducts(@PathVariable Double max) {
+        ApiResponse<List<ProductEntity>> productResponseEntity;
+        productResponseEntity = ApiResponse.<List<ProductEntity>>builder()
+                .message("Get Products Successfully!")
+                .status(HttpStatus.OK)
+                .payload(productService.getTopProducts(max))
+                .time(LocalDateTime.now())
+                .build();
+        return productResponseEntity;
+    }
+
+    @GetMapping("/search")
+    @Operation(summary = "search product by title")
+    public ApiResponse<List<ProductEntity>> searchProduct(@RequestParam("title") String title) {
+        List<ProductEntity> productEntities = productService.searchProductByTitle(title);
+        return ApiResponse.<List<ProductEntity>>builder()
+                .message("Retrieve Products " + title + "Successfully!")
+                .status(HttpStatus.OK)
+                .payload(productEntities)
+                .time(LocalDateTime.now())
+                .build();
     }
 }

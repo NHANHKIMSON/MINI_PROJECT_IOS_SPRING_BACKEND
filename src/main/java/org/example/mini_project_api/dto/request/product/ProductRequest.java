@@ -8,6 +8,7 @@ import java.util.List;
 public class ProductRequest {
     private String name;
     private List<String> imagesUrl;
+    private Double price;
     private Boolean isFavorite;
     private Integer categoryId;
     private ProductDetailRequest productDetail;

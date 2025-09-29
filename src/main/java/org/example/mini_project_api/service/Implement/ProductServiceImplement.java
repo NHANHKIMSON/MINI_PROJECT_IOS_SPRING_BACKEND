@@ -32,6 +32,7 @@ public class ProductServiceImplement implements ProductService {
         ProductEntity productEntity = new ProductEntity();
         productEntity.setName(productRequest.getName());
         productEntity.setImagesUrl(productRequest.getImagesUrl());
+        productEntity.setPrice(productRequest.getPrice());
         productEntity.setIsFavorite(productRequest.getIsFavorite());
         CategoryEntity category = categoryService.getCategoryById(productRequest.getCategoryId());
         productEntity.setCategory(category);
@@ -83,8 +84,27 @@ public class ProductServiceImplement implements ProductService {
     public List<ProductEntity> getProductByCategoryId(Long categoryId) {
         System.out.println(categoryId);
         List<ProductEntity> productEntities = productRepository.getAllProductByCategory_Id(categoryId);
-        if (productEntities.size() == 0) {
+        if (productEntities.isEmpty()) {
             throw new NotFoundException("Product Not Found");
+        }
+        return productEntities;
+    }
+
+    @Override
+    public List<ProductEntity> getSaveProduct() {
+        return productRepository.getAllFavoriteProducts();
+    }
+
+    @Override
+    public List<ProductEntity> getTopProducts(Double max) {
+        return productRepository.getTopByPrice(max);
+    }
+
+    @Override
+    public List<ProductEntity> searchProductByTitle(String title) {
+        List<ProductEntity> productEntities = productRepository.findByTitleContainingIgnoreCase(title.trim());
+        if (productEntities.isEmpty()) {
+            throw new NotFoundException("Product Not" + title + "Found");
         }
         return productEntities;
     }
