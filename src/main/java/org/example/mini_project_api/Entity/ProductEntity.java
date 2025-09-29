@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 @Entity
 @Table(name = "product")
 @Data
@@ -12,7 +14,7 @@ public class ProductEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String image;
+    private List<String> imagesUrl;
     private Boolean isFavorite = false;
     private Double price;
 
@@ -21,7 +23,7 @@ public class ProductEntity {
     @JsonManagedReference
     CategoryEntity category;
 
-    @OneToOne()
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "detail_id")
     @JsonManagedReference
     private ProductDetail productDetail;
