@@ -14,6 +14,7 @@ public class ProductEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    private String image;
     private List<String> imagesUrl;
     private Boolean isFavorite = false;
     private Double price;

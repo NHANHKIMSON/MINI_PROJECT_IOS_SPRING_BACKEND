@@ -7,6 +7,7 @@ import java.util.List;
 @Data
 public class ProductRequest {
     private String name;
+    private String image;
     private List<String> imagesUrl;
     private Double price;
     private Boolean isFavorite;
