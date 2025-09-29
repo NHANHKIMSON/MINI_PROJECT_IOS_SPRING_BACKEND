@@ -9,6 +9,7 @@ public class ProductRequest {
     private String name;
     private List<String> imagesUrl;
     private Boolean isFavorite;
+    private Double price;
     private Integer categoryId;
     private ProductDetailRequest productDetail;
 }

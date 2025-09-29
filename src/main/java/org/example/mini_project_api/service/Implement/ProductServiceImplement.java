@@ -31,6 +31,7 @@ public class ProductServiceImplement implements ProductService {
     public ProductEntity createProduct(ProductRequest productRequest) {
         ProductEntity productEntity = new ProductEntity();
         productEntity.setName(productRequest.getName());
+        productEntity.setPrice(productRequest.getPrice());
         productEntity.setImagesUrl(productRequest.getImagesUrl());
         productEntity.setIsFavorite(productRequest.getIsFavorite());
         CategoryEntity category = categoryService.getCategoryById(productRequest.getCategoryId());
