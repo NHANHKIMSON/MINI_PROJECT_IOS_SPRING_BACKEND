@@ -20,4 +20,6 @@ public interface ProductService {
     List<ProductEntity> getSaveProduct();
 
     List<ProductEntity> getTopProducts(Double max);
+
+    List<ProductEntity> searchProductByTitle(String title);
 }

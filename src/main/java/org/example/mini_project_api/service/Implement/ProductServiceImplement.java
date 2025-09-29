@@ -89,4 +89,13 @@ public class ProductServiceImplement implements ProductService {
     public List<ProductEntity> getTopProducts(Double max) {
         return productRepository.getTopByPrice(max);
     }
+
+    @Override
+    public List<ProductEntity> searchProductByTitle(String title) {
+        List<ProductEntity> productEntities = productRepository.findByTitleContainingIgnoreCase(title.trim());
+        if (productEntities.isEmpty()) {
+            throw new NotFoundException("Product Not" + title + "Found");
+        }
+        return productEntities;
+    }
 }

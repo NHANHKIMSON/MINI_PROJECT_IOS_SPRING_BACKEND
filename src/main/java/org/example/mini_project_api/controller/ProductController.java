@@ -132,4 +132,16 @@ public class ProductController {
                 .build();
         return productResponseEntity;
     }
+
+    @GetMapping("/search")
+    @Operation(summary = "search product by title")
+    public ApiResponse<List<ProductEntity>> searchProduct(@RequestParam("title") String title) {
+        List<ProductEntity> productEntities = productService.searchProductByTitle(title);
+        return ApiResponse.<List<ProductEntity>>builder()
+                .message("Retrieve Products " + title + "Successfully!")
+                .status(HttpStatus.OK)
+                .payload(productEntities)
+                .time(LocalDateTime.now())
+                .build();
+    }
 }
