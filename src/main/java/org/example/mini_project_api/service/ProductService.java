@@ -18,4 +18,6 @@ public interface ProductService {
     List<ProductEntity> getProductByCategoryId(Long categoryId);
 
     List<ProductEntity> getSaveProduct();
+
+    List<ProductEntity> getTopProducts(Double max);
 }

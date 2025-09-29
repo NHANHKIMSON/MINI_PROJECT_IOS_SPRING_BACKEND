@@ -16,4 +16,6 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Integer>
 
     @Query("SELECT p FROM ProductEntity p WHERE p.isFavorite = true")
     List<ProductEntity> getAllFavoriteProducts();
+
+    List<ProductEntity> getTopByPrice(Double price);
 }

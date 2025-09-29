@@ -31,6 +31,7 @@ public class ProductServiceImplement implements ProductService {
         ProductEntity productEntity = new ProductEntity();
         productEntity.setName(productRequest.getName());
         productEntity.setImage(productRequest.getImage());
+        productEntity.setPrice(productRequest.getPrice());
         productEntity.setIsFavorite(productRequest.getIsFavorite());
         CategoryEntity category = categoryService.getCategoryById(productRequest.getCategoryId());
         productEntity.setCategory(category);
@@ -49,6 +50,7 @@ public class ProductServiceImplement implements ProductService {
         productEntity.setName(productRequest.getName());
         productEntity.setImage(productRequest.getImage());
         productEntity.setIsFavorite(productRequest.getIsFavorite());
+        productEntity.setPrice(productRequest.getPrice());
         CategoryEntity category = categoryService.getCategoryById(productRequest.getCategoryId());
         productEntity.setCategory(category);
         return productRepository.save(productEntity);
@@ -81,5 +83,10 @@ public class ProductServiceImplement implements ProductService {
     @Override
     public List<ProductEntity> getSaveProduct() {
         return productRepository.getAllFavoriteProducts();
+    }
+
+    @Override
+    public List<ProductEntity> getTopProducts(Double max) {
+        return productRepository.getTopByPrice(max);
     }
 }

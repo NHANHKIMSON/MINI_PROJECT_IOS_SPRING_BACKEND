@@ -109,12 +109,25 @@ public class ProductController {
     }
 
     @GetMapping("isFavorite")
+    @Operation(summary = "Get All Product Favorite")
     public ApiResponse<List<ProductEntity>> getSaveProducts() {
         ApiResponse<List<ProductEntity>> productResponseEntity;
         productResponseEntity = ApiResponse.<List<ProductEntity>>builder()
                 .message("Get Products Successfully!")
                 .status(HttpStatus.OK)
                 .payload(productService.getSaveProduct())
+                .time(LocalDateTime.now())
+                .build();
+        return productResponseEntity;
+    }
+
+    @GetMapping("top/{max}")
+    public ApiResponse<List<ProductEntity>> getTopProducts(@PathVariable Double max) {
+        ApiResponse<List<ProductEntity>> productResponseEntity;
+        productResponseEntity = ApiResponse.<List<ProductEntity>>builder()
+                .message("Get Products Successfully!")
+                .status(HttpStatus.OK)
+                .payload(productService.getTopProducts(max))
                 .time(LocalDateTime.now())
                 .build();
         return productResponseEntity;
