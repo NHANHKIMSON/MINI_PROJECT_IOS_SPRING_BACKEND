@@ -97,7 +97,7 @@ public class ProductController {
         return productResponseEntity;
     }
 
-    @GetMapping("/{categoryId}")
+    @GetMapping("category/{categoryId}")
     public ApiResponse<List<ProductEntity>> getProductsByCategoryId(@PathVariable("categoryId") Long categoryId) {
         ApiResponse<List<ProductEntity>> productResponseEntity;
         productResponseEntity = ApiResponse.<List<ProductEntity>>builder()

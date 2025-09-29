@@ -40,6 +40,7 @@ public class ProductServiceImplement implements ProductService {
 
     @Override
     public ProductEntity getProductById(Integer id) {
+        System.out.println("Id+++++++++" + id);
         return productRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Product Not Found"));
     }
