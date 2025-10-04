@@ -1,6 +1,7 @@
 package org.example.mini_project_api.service.Implement;
 
 import org.example.mini_project_api.Entity.CategoryEntity;
+import org.example.mini_project_api.Entity.ProductDetail;
 import org.example.mini_project_api.Entity.ProductEntity;
 import org.example.mini_project_api.dto.request.product.ProductFavoriteRequest;
 import org.example.mini_project_api.dto.request.product.ProductRequest;
@@ -30,11 +31,22 @@ public class ProductServiceImplement implements ProductService {
     public ProductEntity createProduct(ProductRequest productRequest) {
         ProductEntity productEntity = new ProductEntity();
         productEntity.setName(productRequest.getName());
-        productEntity.setImage(productRequest.getImage());
         productEntity.setPrice(productRequest.getPrice());
+        productEntity.setImagesUrl(productRequest.getImagesUrl());
         productEntity.setIsFavorite(productRequest.getIsFavorite());
+        productEntity.setPrice(productRequest.getPrice());
         CategoryEntity category = categoryService.getCategoryById(productRequest.getCategoryId());
         productEntity.setCategory(category);
+        ProductDetail productDetail = new ProductDetail();
+        productDetail.setCondition(productRequest.getProductDetail().getCondition());
+        productDetail.setBrand(productRequest.getProductDetail().getBrand());
+        productDetail.setModel(productRequest.getProductDetail().getModel());
+        productDetail.setColor(productRequest.getProductDetail().getColor());
+        productDetail.setYear(productRequest.getProductDetail().getYear());
+        productDetail.setSize(productRequest.getProductDetail().getSize());
+        productDetail.setType(productRequest.getProductDetail().getType());
+        productDetail.setDescription(productRequest.getProductDetail().getDescription());
+        productEntity.setProductDetail(productDetail);
         return productRepository.save(productEntity);
     }
 
@@ -49,9 +61,8 @@ public class ProductServiceImplement implements ProductService {
     public ProductEntity updateProduct(Integer id, ProductRequest productRequest) {
         ProductEntity productEntity = getProductById(id);
         productEntity.setName(productRequest.getName());
-        productEntity.setImage(productRequest.getImage());
+        productEntity.setImagesUrl(productRequest.getImagesUrl());
         productEntity.setIsFavorite(productRequest.getIsFavorite());
-        productEntity.setPrice(productRequest.getPrice());
         CategoryEntity category = categoryService.getCategoryById(productRequest.getCategoryId());
         productEntity.setCategory(category);
         return productRepository.save(productEntity);
